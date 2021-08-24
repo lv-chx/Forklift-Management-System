@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>信息编辑</title>
+    <link rel="stylesheet" type="text/css" href="/css/common.css">
+</head>
+
+<body>
+<style>
+.leftDiv{
+    float: left;
+    width: 50%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+	
+}
+.rightDiv{
+    float: right;
+    width: 50%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.wordStyle{
+	font-size:24px;
+	text-align:center;
+	line-height:45px;
+}
+.inputStyle{
+	font-size:20px;
+	margin-left:10px;
+	width:150px;
+	text-align:center;
+	line-height:22px;
+}
+
+</style>
+<p style="color:white;background-color:#87cefa;font-size:24px;text-align:center;font-family:Simsun;font-weight:bold;line-height:45px;" id="title_name" >信息登录</p>
+
+<form id="editForm" method="get" style="text-align:center;" class="form-horizontal" action="/doUpdateDataSubmit">
+	<div class="form-group">
+		<div class = "leftDiv"><label for="userName" style="" class="wordStyle">姓名</label></div>
+		<div class = "rightDiv"><input type="text" name="userName" class="inputStyle" id="userName" placeholder="" th:value="${user.userName}"/></div>
+	</div>
+	<div class="form-group" style="">
+		<div class = "leftDiv"><label for="tel" class="wordStyle">电话</label></div>
+		<div class = "rightDiv"><input type="text" name="tel" class="inputStyle" id="tel" placeholder="" th:value="${user.tel}" /></div>     
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label  class="wordStyle">单位</label></div>
+		<div class = "rightDiv"><input type="text" name="employer" class="inputStyle" id="employer" placeholder="" th:value="${user.employer}"/></div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label  class="wordStyle">工号</label></div>
+		<div class = "rightDiv">
+			<label class = "inputStyle" th:text="${user.workNo}"></label>
+			<input type="hidden" name="workNo" class="inputStyle" id="workNo" placeholder="" th:value="${user.workNo}"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label class="wordStyle">是否有国家证</label></div>
+		
+		<div class = "rightDiv">
+			<label for="haveCertificate_yes" style = "margin-left:30px">是</label>
+			<input type="radio" name="haveCertificate" id="haveCertificate_yes" th:checked="${user.haveCertificate eq '是'}" style="" class="form-control" placeholder="" value="是"/>
+		
+			<label for="haveCertificate_no" style = "margin-left:30px" >否</label>
+			<input type="radio" name="haveCertificate" id="haveCertificate_no" style="" th:checked="${user.haveCertificate eq '否'}" class="form-control" placeholder="" value="否"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label class="wordStyle">牵引车/叉车/天车选择</label></div>
+		<div class = "rightDiv">
+			<select id="carType" name="carType" style = "margin-left:10px">
+				<option value=""></option>
+				<option th:selected="${user.carType eq '牵引车'}" value="牵引车">牵引车</option>
+				<option th:selected="${user.carType eq '叉车'}"  value="叉车">叉车</option>
+				<option th:selected="${user.carType eq '天车选择'}" value="天车">天车选择</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv" style = "height: 90px;"> <label style="font-size:24px;text-align:center;line-height:45px;" class="control-label">备注</label></div>
+		<div class = "rightDiv" style = "height: 90px;">
+			<textarea id="remakes" name="remakes" rows="5" cols="33" style = "resize: none;margin-left:10px" autocomplete = "off" th:text="${user.remakes}">
+			</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label class="wordStyle">是否通过审核</label></div>
+
+		<div class = "rightDiv">
+			<label for="auditStatus_yes" style = "margin-left:30px">通过</label>
+			<input type="radio" name="auditStatus" id="auditStatus_yes" th:checked="${user.auditStatus eq '通过'}" style="" class="form-control" placeholder="" value="通过"/>
+		
+			<label for="auditStatus_no" style = "margin-left:30px" >拒绝</label>
+			<input type="radio" name="auditStatus" id="auditStatus_no" style="" th:checked="${user.auditStatus eq '拒绝'}" class="form-control" placeholder="" value="拒绝"/>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label for="userName" style="" class="wordStyle">证件有效期开始日</label></div>
+		<div class = "rightDiv"><input type="text" name="startDate" class="inputStyle" id="startDate" placeholder="" th:value="${user.startDate}"/></div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv"><label for="userName" style="" class="wordStyle">证件有效期结束日</label></div>
+		<div class = "rightDiv"><input type="text" name="endDate" class="inputStyle" id="endDate" placeholder="" th:value="${user.endDate}"/></div>
+	</div>
+	<div class="form-group">
+		<div class = "leftDiv" style = "height: 90px;"> <label style="font-size:24px;text-align:center;line-height:45px;" class="control-label">管理人员备注</label></div>
+		<div class = "rightDiv" style = "height: 90px;">
+			<textarea id="manageRemakes" name="manageRemakes" rows="5" cols="33" style = "resize: none;margin-left:10px" autocomplete = "off" th:text="${user.manageRemakes}">
+			</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="buttonStyle" style="">提交</button>
+	</div>
+</form>
+<form id="editForm" method="get" style="text-align:center;" class="form-horizontal" action="/doManage">
+	<button type="submit" class="buttonStyle" style="">返回</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+</head>
+<body>
+<style>
+td{
+	border:1px solid #000;
+}
+th{
+	background-color:orange;
+	border:1px solid #000;
+}
+table{
+	width:1340px;
+}
+</style>
+<h1 th:text="管理员系统"></h1>
+    <table cellpadding="0" cellspacing="0">
+        <thead>
+            <th style = "width:100px">姓名</th>
+            <th style = "width:100px">电话</th>
+            <th style = "width:100px">单位</th>
+            <th style = "width:100px">工号</th>
+            <th style = "width:100px">是否有国家证</th>
+            <th style = "width:170px">牵引车/叉车/天车选择</th>
+            <th style = "width:200px">备注</th>
+            <th style = "width:100px">是否通过审核</th>
+            <th style = "width:100px">管理人员备注</th>
+            <th style = "width:100px">证件有效期开始日</th>
+            <th style = "width:100px">证件有效期结束日</th>
+        </thead>
+        <tbody>
+            <tr th:each="users,userStat:${userList}" >
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.userName}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.tel}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.employer}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.workNo}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.haveCertificate}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.carType}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.remakes}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.auditStatus}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.manageRemakes}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.startDate}"></td>
+                <td th:style="${users.endDate > nowDate} ? 'background: white' : 'background: red'" th:text="${users.endDate}"></td>
+                <td style = "border:none;width:60px"><button style = "height:100%;width:50px;margin-left:10px" th:onclick = "updateData([[${users.workNo}]])">编辑</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+	<button onclick = "download()">下载</button>
+</body>
+<script type="text/javascript">
+function download(){
+     var url= "doDownload";
+     window.open(url);
+}
+function updateData(workNo){
+     var url= "doUpdateData?workNo="+workNo;
+     window.open(url);
+}
+</script>
+</html>
